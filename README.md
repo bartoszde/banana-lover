@@ -9,19 +9,20 @@
 - **game is framed in a board game**
 
 ### Milestone 1
-- [ ] *display player + allow movement up/down*
-- [ ] *frame game board*
+- [x] *display player + allow movement up/down*
+- [x] *frame game board*
+- [x] *user not leaving game board*
 
 ### Milestone 2
-- [ ] *display obstacles and move them*
+- [ ] *display obstacles and move them from right to left*
 - [ ] *detect when is colision player-obstacle*
 
 ### Milestone 3
 - [ ] *random possition of obstacles*
-- [ ] *user not leaving game board*
 
 ### Milestone 4
-- [ ] *add shooting*
+- [ ] *add shooting to remove obstacles*
+- [ ] *clean code /remove obstacles from array when they left board*
 
 ### Milestone 5
 - [ ] *display bonuses and move them*
