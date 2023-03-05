@@ -16,16 +16,17 @@
 ### Milestone 2
 - [x] *display obstacles and move them from right to left*
 - [x] *detect when is colision player-obstacle*
-- [ ] *random possition of obstacles*
-- [ ] *add game over page*
+- [x] *random possition of obstacles*
+- [x] *add game over page*
 
 ### Milestone 3
-- [ ] *clean code /remove obstacles from array when they left board*
+- [x] *clean code /remove obstacles from array when they left board*
 
 ### Milestone 4
 - [ ] *display bonuses and move them*
 - [ ] *detect when is colision player-bonus*
 - [ ] *random position of bonuses*
+- [ ] *add score for collecting bonuses*
 
 
 ### Milestone 5
