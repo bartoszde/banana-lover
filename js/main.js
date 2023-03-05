@@ -14,15 +14,16 @@ class Game {
         setInterval( () => {  
             const myObstacle = new Obstacle();
             this.obstaclesArr.push(myObstacle);
-        }, 4000)
+        }, 2000);
         
         //move all obstacles
         setInterval( () => {   
             this.obstaclesArr.forEach( (obstacleInstance) => {
                 obstacleInstance.moveLeft();
-                this.detectCollision(obstacleInstance); 
+                this.detectCollision(obstacleInstance);
+                this.removeObstacleIfOutside(obstacleInstance);
             });
-        }, 200);
+        }, 30);
     }
     attachEventListeners(){
         document.addEventListener("keydown", (event) => {
@@ -44,6 +45,12 @@ class Game {
             //console.log("game over my fren!");
             window.location.href = "./gameover.html";
           }
+    }
+    removeObstacleIfOutside(obstacleInstance){
+        if(obstacleInstance.positionX < 0){
+            obstacleInstance.obstacleElm.remove(); //remove from the dom
+            this.obstaclesArr.shift(); // remove from the array
+        }
     }
 }
 
@@ -79,15 +86,15 @@ class Obstacle {
     constructor (){
         this.width = 70;
         this.height = 70;
-        this.positionX = 1000;
-        this.positionY = 245 - (this.height / 2);
+        this.positionX = 1000 - (this.width);
+        this.obstaclePossitnion = [0, 70, 140, 210, 280, 350, 420];
+        this.positionY = this.obstaclePossitnion[Math.floor(Math.random() * this.obstaclePossitnion.length)];
         this.obstacleElm = null;
         this.createDomElement();
     }
 
     createDomElement(){
         this.obstacleElm = document.createElement('div'); 
-
         this.obstacleElm.className = "obstacle";
         this.obstacleElm.style.width = this.width  + "px";
         this.obstacleElm.style.height = this.height  + "px";
@@ -98,9 +105,8 @@ class Obstacle {
     };
 
     moveLeft(){
-        this.positionX = this.positionX - 10;
+        this.positionX = this.positionX - 5;
         this.obstacleElm.style.left = this.positionX + "px";
-        
     }
 }
 
