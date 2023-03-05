@@ -13,8 +13,6 @@
 }
 #player{
     background-color: rgb(229, 255, 0);
-    height: 70px;
-    width: 70px;
     position: absolute;
     bottom: 0;
     left: 50px;
@@ -23,4 +21,10 @@
 .obstacle {
     background-color: violet;
     position: absolute;
+}
+
+#gameover {
+    text-align: center;
+    color: yellow;
+    background-color: blueviolet;
 }
