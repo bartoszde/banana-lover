@@ -4,6 +4,8 @@ class Game {
     constructor(){
         this.player = null;
         this.obstaclesArr = [];  //will store instances of the class Obstacle
+        this.bonusArr = [];
+        this.banana = 0;
     }
     start(){
         this.player = new Player();
@@ -14,7 +16,7 @@ class Game {
         setInterval( () => {  
             const myObstacle = new Obstacle();
             this.obstaclesArr.push(myObstacle);
-        }, 2000);
+        }, 1500);
         
         //move all obstacles
         setInterval( () => {   
@@ -23,7 +25,22 @@ class Game {
                 this.detectCollision(obstacleInstance);
                 this.removeObstacleIfOutside(obstacleInstance);
             });
-        }, 30);
+        }, 16);
+
+        //create bonus
+        setInterval( () => {
+            const myBonus = new Bonus();
+            this.bonusArr.push(myBonus);
+        }, 2000);
+
+        //move all bonuses
+        setInterval( () => {
+            this.bonusArr.forEach( (bonusInstance) => {
+                bonusInstance.moveBonusLeft();
+                this.detectBonusCollision(bonusInstance);
+                this.removeBonusIfOutside(bonusInstance);
+            });
+        }, 40);
     }
     attachEventListeners(){
         document.addEventListener("keydown", (event) => {
@@ -42,16 +59,31 @@ class Game {
             this.player.positionY < obstacleInstance.positionY + obstacleInstance.height &&
             this.player.height + this.player.positionY > obstacleInstance.positionY
           ){
-            //console.log("game over my fren!");
             window.location.href = "./gameover.html";
           }
-    }
+    };
     removeObstacleIfOutside(obstacleInstance){
         if(obstacleInstance.positionX < 0){
             obstacleInstance.obstacleElm.remove(); //remove from the dom
             this.obstaclesArr.shift(); // remove from the array
         }
-    }
+    };
+
+    detectBonusCollision(bonusInstance){
+        if (
+            this.player.positionX < bonusInstance.positionX + bonusInstance.width &&
+            this.player.positionX + this.player.width > bonusInstance.positionX &&
+            this.player.positionY < bonusInstance.positionY + bonusInstance.height &&
+            this.player.height + this.player.positionY > bonusInstance.positionY
+          ){
+          }
+    };
+    removeBonusIfOutside(bonusInstance){
+        if(bonusInstance.positionX < 0){
+            bonusInstance.bonusElm.remove(); //remove from the bonus dom
+            this.bonusArr.shift(); // remove from the bonus array
+        }
+    };
 }
 
 class Player {
@@ -87,8 +119,8 @@ class Obstacle {
         this.width = 70;
         this.height = 70;
         this.positionX = 1000 - (this.width);
-        this.obstaclePossitnion = [0, 70, 140, 210, 280, 350, 420];
-        this.positionY = this.obstaclePossitnion[Math.floor(Math.random() * this.obstaclePossitnion.length)];
+        this.obstaclePositnion = [0, 70, 140, 210, 280, 350, 420];
+        this.positionY = this.obstaclePositnion[Math.floor(Math.random() * this.obstaclePositnion.length)];
         this.obstacleElm = null;
         this.createDomElement();
     }
@@ -108,6 +140,35 @@ class Obstacle {
         this.positionX = this.positionX - 5;
         this.obstacleElm.style.left = this.positionX + "px";
     }
+}
+
+class Bonus {
+    constructor (){
+        this.width = 70;
+        this.height = 70;
+        this.positionX = 1000 - (this.width);
+        this.bonusPosition = [0, 70, 140, 210, 280, 350, 420];
+        this.positionY = this.bonusPosition[Math.floor(Math.random() * this.bonusPosition.length)];
+        this.bonusElm = null;
+        this.createBonusElement();
+    }
+
+    createBonusElement(){
+        this.bonusElm = document.createElement('div');
+        this.bonusElm.className = "bonus";
+        this.bonusElm.style.width = this.width + "px";
+        this.bonusElm.style.height = this.height + "px";
+        this.bonusElm.style.top = this.positionY + "px";
+
+        const boardElm = document.getElementById("game-board");
+        boardElm.appendChild(this.bonusElm);
+    };
+
+    moveBonusLeft(){
+        this.positionX = this.positionX - 5;
+        this.bonusElm.style.left = this.positionX + "px";
+    }
+
 }
 
 
