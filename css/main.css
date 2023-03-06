@@ -12,7 +12,8 @@
     text-align: center;
 }
 #player{
-    background-color: rgb(229, 255, 0);
+    background-color: yellow;
+    background-image: url();
     position: absolute;
     bottom: 0;
     left: 50px;
