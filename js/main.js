@@ -1,12 +1,26 @@
 const board = document.getElementById("game-board")
 
+class UI {
+    constructor(game){
+        this.game = game;
+        this.fontSize = 25;
+        this.fontFamily = 'Arial';
+        this.color = 'white';
+    }
+    displayScore() {
+        this.score = document.getElementById("scoreboard").innerHTML
+    }  
+}
+
+
 class Game {
     constructor(){
         this.player = null;
         this.obstaclesArr = [];  //will store instances of the class Obstacle
         this.bonusArr = [];
-        this.banana = 0;
+        this.scoreElement = 0;
     }
+
     start(){
         this.player = new Player();
         this.attachEventListeners();
@@ -42,6 +56,7 @@ class Game {
             });
         }, 40);
     }
+
     attachEventListeners(){
         document.addEventListener("keydown", (event) => {
             if (event.key === "ArrowUp"){
@@ -70,20 +85,33 @@ class Game {
     };
 
     detectBonusCollision(bonusInstance){
-        if (
-            this.player.positionX < bonusInstance.positionX + bonusInstance.width &&
+        if (this.player.positionX < bonusInstance.positionX + bonusInstance.width &&
             this.player.positionX + this.player.width > bonusInstance.positionX &&
             this.player.positionY < bonusInstance.positionY + bonusInstance.height &&
-            this.player.height + this.player.positionY > bonusInstance.positionY
+            this.player.height + this.player.positionY > bonusInstance.positionY 
           ){
+            bonusInstance.bonusElm.remove(); //remove from the bonus dom
+            this.bonusArr.shift();
+            this.score += 5;
+            this.scoreElement = this.score; 
           }
     };
+
     removeBonusIfOutside(bonusInstance){
         if(bonusInstance.positionX < 0){
             bonusInstance.bonusElm.remove(); //remove from the bonus dom
             this.bonusArr.shift(); // remove from the bonus array
         }
     };
+
+    incrementScore(){
+            this.score +=5;
+            scoreElement.textContent = this.score;
+    }
+
+    
+
+
 }
 
 class Player {
@@ -151,6 +179,7 @@ class Bonus {
         this.positionY = this.bonusPosition[Math.floor(Math.random() * this.bonusPosition.length)];
         this.bonusElm = null;
         this.createBonusElement();
+        this.points = 5;
     }
 
     createBonusElement(){
