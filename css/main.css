@@ -28,3 +28,8 @@
     color: yellow;
     background-color: blueviolet;
 }
+
+.bonus {
+    background-color: ivory;
+    position: absolute;
+}
