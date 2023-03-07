@@ -4,23 +4,33 @@
     border: 2px solid black;
     margin: auto;
     position: relative;
-    background-color: rgb(61, 10, 216);
+    background-color: rgb(211, 200, 180);
     box-shadow: 5px 10px #5ed1b0;
+    background-image: url(/images/ezgif.com-crop.gif);
 }
 
 #game-name {
     text-align: center;
 }
+
+#score {
+    color: black;
+    font-size: 18pt;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
 #player{
-    background-color: yellow;
-    background-image: url();
+    background-color: transparent;
+    background-image: url("/images/ezgif.com-resize.gif");
     position: absolute;
     bottom: 0;
     left: 50px;
 }
 
 .obstacle {
-    background-color: violet;
+    background-image: url("/images/blueberry.png");
     position: absolute;
 }
 
@@ -31,6 +41,6 @@
 }
 
 .bonus {
-    background-color: ivory;
+    background-image: url("/images/banano.png");
     position: absolute;
 }
