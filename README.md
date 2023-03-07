@@ -27,7 +27,7 @@
 - [x] *detect when is colision player-bonus*
 - [x] *random position of bonuses*
 - [x] *removes bonus object by colision with player*
-- [ ] *add score for collecting bonuses*
+- [x] *add score for collecting bonuses*
 
 
 ### Milestone 5
