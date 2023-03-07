@@ -1,16 +1,5 @@
 const board = document.getElementById("game-board")
-
-class UI {
-    constructor(game){
-        this.game = game;
-        this.fontSize = 25;
-        this.fontFamily = 'Arial';
-        this.color = 'white';
-    }
-    displayScore() {
-        this.score = document.getElementById("scoreboard").innerHTML
-    }  
-}
+let score = 0;
 
 
 class Game {
@@ -19,6 +8,7 @@ class Game {
         this.obstaclesArr = [];  //will store instances of the class Obstacle
         this.bonusArr = [];
         this.scoreElement = 0;
+      
     }
 
     start(){
@@ -92,8 +82,9 @@ class Game {
           ){
             bonusInstance.bonusElm.remove(); //remove from the bonus dom
             this.bonusArr.shift();
-            this.score += 5;
-            this.scoreElement = this.score; 
+            score++;
+            this.scoreElm = document.getElementById('score');
+            this.scoreElm.innerHTML = "Bananas collected: " + score;
           }
     };
 
@@ -125,6 +116,7 @@ class Player {
 
         this.playerElm.style.width = this.width + "px";
         this.playerElm.style.height = this.height + "px";
+
     }
 
     moveUp(){
