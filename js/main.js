@@ -92,7 +92,7 @@ class Game {
         if(obstacleInstance.positionX < 0){
             obstacleInstance.obstacleElm.remove(); //remove from the dom
             this.obstaclesArr.shift(); // remove from the array
-        }
+        } 
     };
 
     detectBonusCollision(bonusInstance){
@@ -131,24 +131,16 @@ class Game {
             ){
                 obstacleInstance.obstacleElm.remove();
                 bulletInstance.bulletElm.remove();
-                console.log("buum bummm") ;
+                this.obstaclesArr.shift();
             }
         });
     } 
 
-   // removeObstacleIfBullet(bulletInstance){
-   //     if(bulletInstance < obstacleInstance) {
-    //        bulletInstance.bulletElm.remove();
-    //        this.bulletArr.shift();
-    //    }
-   // }
-
     removeBulletIfOutside(bulletInstance){
-        if (bulletInstance.positionX > 1000){
+        if (bulletInstance.positionX > 980){
             bulletInstance.bulletElm.remove();
             this.bulletArr.shift();
         }
-
     }
 
 
