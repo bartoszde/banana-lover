@@ -1,5 +1,5 @@
 const board = document.getElementById("game-board")
-let score = 0;
+score = 0
 
 
 
@@ -9,6 +9,7 @@ class Game {
         this.obstaclesArr = [];  //will store instances of the class Obstacle
         this.bonusArr = [];
         this.bulletArr = [];
+        
         
     }
 
@@ -30,6 +31,13 @@ class Game {
                 this.detectCollision(obstacleInstance);
                 this.removeObstacleIfOutside(obstacleInstance);
             });
+
+            this.bulletArr.forEach( (bulletInstance) => {
+                bulletInstance.shootMove();
+                this.detectBulletCollision(bulletInstance);
+                this.removeBulletIfOutside(bulletInstance);
+            
+            })
         }, 16);
 
         //create bonus
@@ -42,26 +50,33 @@ class Game {
         setInterval( () => {
             this.bonusArr.forEach( (bonusInstance) => {
                 bonusInstance.moveBonusLeft();
-                this.detectBonusCollision(bonusInstance);
-                this.removeBonusIfOutside(bonusInstance);
+               this.detectBonusCollision(bonusInstance);
+               this.removeBonusIfOutside(bonusInstance);
             });
         }, 40);
 
+    };
 
-        }
+
 
     attachEventListeners(){
         document.addEventListener("keydown", (event) => {
-            if (event.key === "ArrowUp"){
-                this.player.moveUp();
-            } else if (event.key === "ArrowDown") {
-                this.player.moveDown();
-            } else if (event.key === " ") {
-                const myBullet = new Bullet (this.player.positionX, this.player.positionY);
-                this.bulletsArr.push(myBullet);
+            switch (event.key) {
+                case "ArrowUp":
+                    this.player.moveUp();
+                    break;
+                case "ArrowDown":
+                    this.player.moveDown();
+                    break;
+                case " ":
+                    const myBullet = new Bullet(this.player.positionX, this.player.positionY);
+                    this.bulletArr.push(myBullet);
+                    break;
             }
-        });
-    }
+        }); 
+    };
+
+
 
     detectCollision(obstacleInstance){
         if (
@@ -89,8 +104,8 @@ class Game {
             bonusInstance.bonusElm.remove(); //remove from the bonus dom
             this.bonusArr.shift();
             score++;
-            this.scoreElm = document.getElementById('score');
-            this.scoreElm.innerHTML = "Bananas collected: " + score;
+            this.scoreElm = document.getElementById("score");
+            this.scoreElm.innerHTML = "Bananaaaaaas " + score;
 
           }
     };
@@ -106,6 +121,36 @@ class Game {
             this.score++;
             scoreElement.textContent = this.score;
     }
+
+    detectBulletCollision(bulletInstance) {
+        this.obstaclesArr.forEach((obstacleInstance) => {
+        if (bulletInstance.positionY > obstacleInstance.positionY &&
+            bulletInstance.positionY < obstacleInstance.positionY + obstacleInstance.height &&
+            bulletInstance.positionX + bulletInstance.width > obstacleInstance.positionX &&
+            bulletInstance.positionX < obstacleInstance.positionX + obstacleInstance.width
+            ){
+                obstacleInstance.obstacleElm.remove();
+                bulletInstance.bulletElm.remove();
+                console.log("buum bummm") ;
+            }
+        });
+    } 
+
+   // removeObstacleIfBullet(bulletInstance){
+   //     if(bulletInstance < obstacleInstance) {
+    //        bulletInstance.bulletElm.remove();
+    //        this.bulletArr.shift();
+    //    }
+   // }
+
+    removeBulletIfOutside(bulletInstance){
+        if (bulletInstance.positionX > 1000){
+            bulletInstance.bulletElm.remove();
+            this.bulletArr.shift();
+        }
+
+    }
+
 
 }
 
@@ -151,7 +196,7 @@ class Obstacle {
     }
 
     createDomElement(){
-        this.obstacleElm = document.createElement('div'); 
+        this.obstacleElm = document.createElement("div"); 
         this.obstacleElm.className = "obstacle";
         this.obstacleElm.style.width = this.width  + "px";
         this.obstacleElm.style.height = this.height  + "px";
@@ -180,7 +225,7 @@ class Bonus {
     }
 
     createBonusElement(){
-        this.bonusElm = document.createElement('div');
+        this.bonusElm = document.createElement("div");
         this.bonusElm.className = "bonus";
         this.bonusElm.style.width = this.width + "px";
         this.bonusElm.style.height = this.height + "px";
@@ -198,32 +243,30 @@ class Bonus {
 }
 
 class Bullet {
-    constructor() {
+    constructor(playerPosX, playerPosY){
         this.width = 20;
-        this.height = 5;
-        this.bullet = null;
-        this.positionX = this.player.positionX + this.player.width + "px";
-        this.positionY = this.player.positionY + (this.player.height / 2) + "px";
+        this.height = 20;
+        this.positionX = playerPosX + 70;
+        this.positionY = playerPosY + 35;
         this.bulletElm = null;
-        this.createElement();
+        this.createBulletElement();
        
     }
 
     createBulletElement(){
-        this.bulletElm = document.createElement('div');
+        this.bulletElm = document.createElement("div");
         this.bulletElm.className = "bullet";
         this.bulletElm.style.width = this.width + "px";
         this.bulletElm.style.height = this.height + "px";
-        this.bulletElm.style.left = this.positionX + "px";
         this.bulletElm.style.top = this.positionY + "px";
 
         const boardElm = document.getElementById("game-board");
         boardElm.appendChild(this.bulletElm);  
     }
 
-    shoot() {
-        this.positionX = this.positionX + 10;
-        this.bulletElm.style.left = this.positionX + 'px';
+    shootMove(){
+        this.positionX = this.positionX + 40;
+        this.bulletElm.style.left = this.positionX + "px";
     }
 
 }
