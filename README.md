@@ -31,5 +31,5 @@
 
 
 ### Milestone 5
-- [ ] *add shooting to remove obstacles*
+- [x] *add shooting to remove obstacles*
 - [ ] *add score list when shooting*
