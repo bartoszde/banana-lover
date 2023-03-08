@@ -2,13 +2,14 @@ const board = document.getElementById("game-board")
 let score = 0;
 
 
+
 class Game {
     constructor(){
         this.player = null;
         this.obstaclesArr = [];  //will store instances of the class Obstacle
         this.bonusArr = [];
-        this.scoreElement = 0;
-      
+        this.bulletArr = [];
+        
     }
 
     start(){
@@ -45,7 +46,9 @@ class Game {
                 this.removeBonusIfOutside(bonusInstance);
             });
         }, 40);
-    }
+
+
+        }
 
     attachEventListeners(){
         document.addEventListener("keydown", (event) => {
@@ -53,6 +56,9 @@ class Game {
                 this.player.moveUp();
             } else if (event.key === "ArrowDown") {
                 this.player.moveDown();
+            } else if (event.key === " ") {
+                const myBullet = new Bullet (this.player.positionX, this.player.positionY);
+                this.bulletsArr.push(myBullet);
             }
         });
     }
@@ -85,6 +91,7 @@ class Game {
             score++;
             this.scoreElm = document.getElementById('score');
             this.scoreElm.innerHTML = "Bananas collected: " + score;
+
           }
     };
 
@@ -96,12 +103,9 @@ class Game {
     };
 
     incrementScore(){
-            this.score +=5;
+            this.score++;
             scoreElement.textContent = this.score;
     }
-
-    
-
 
 }
 
@@ -116,7 +120,6 @@ class Player {
 
         this.playerElm.style.width = this.width + "px";
         this.playerElm.style.height = this.height + "px";
-
     }
 
     moveUp(){
@@ -132,7 +135,9 @@ class Player {
             this.playerElm.style.top = this.positionY + "px";
         }
     };
+
 }
+
 
 class Obstacle {
     constructor (){
@@ -171,7 +176,7 @@ class Bonus {
         this.positionY = this.bonusPosition[Math.floor(Math.random() * this.bonusPosition.length)];
         this.bonusElm = null;
         this.createBonusElement();
-        this.points = 5;
+        
     }
 
     createBonusElement(){
@@ -192,6 +197,36 @@ class Bonus {
 
 }
 
+class Bullet {
+    constructor() {
+        this.width = 20;
+        this.height = 5;
+        this.bullet = null;
+        this.positionX = this.player.positionX + this.player.width + "px";
+        this.positionY = this.player.positionY + (this.player.height / 2) + "px";
+        this.bulletElm = null;
+        this.createElement();
+       
+    }
+
+    createBulletElement(){
+        this.bulletElm = document.createElement('div');
+        this.bulletElm.className = "bullet";
+        this.bulletElm.style.width = this.width + "px";
+        this.bulletElm.style.height = this.height + "px";
+        this.bulletElm.style.left = this.positionX + "px";
+        this.bulletElm.style.top = this.positionY + "px";
+
+        const boardElm = document.getElementById("game-board");
+        boardElm.appendChild(this.bulletElm);  
+    }
+
+    shoot() {
+        this.positionX = this.positionX + 10;
+        this.bulletElm.style.left = this.positionX + 'px';
+    }
+
+}
 
 const game = new Game();
 game.start();
