@@ -10,7 +10,6 @@ class Game {
         this.bonusArr = [];
         this.bulletArr = [];
         
-        
     }
 
     start(){
@@ -18,35 +17,37 @@ class Game {
         this.attachEventListeners();
 
 
-        //create obstacles
+//create obstacles
         setInterval( () => {  
             const myObstacle = new Obstacle();
             this.obstaclesArr.push(myObstacle);
-        }, 1500);
+        }, 1000);
         
-        //move all obstacles
+//move all obstacles
         setInterval( () => {   
             this.obstaclesArr.forEach( (obstacleInstance) => {
                 obstacleInstance.moveLeft();
                 this.detectCollision(obstacleInstance);
                 this.removeObstacleIfOutside(obstacleInstance);
             });
-
+        }, 16);
+       
+// move bullets
+        setInterval( () => {
             this.bulletArr.forEach( (bulletInstance) => {
                 bulletInstance.shootMove();
                 this.detectBulletCollision(bulletInstance);
                 this.removeBulletIfOutside(bulletInstance);
-            
-            })
-        }, 16);
+            });
+        }, 20);
 
-        //create bonus
+//create bonus
         setInterval( () => {
             const myBonus = new Bonus();
             this.bonusArr.push(myBonus);
         }, 2000);
 
-        //move all bonuses
+//move all bonuses
         setInterval( () => {
             this.bonusArr.forEach( (bonusInstance) => {
                 bonusInstance.moveBonusLeft();
@@ -54,7 +55,6 @@ class Game {
                this.removeBonusIfOutside(bonusInstance);
             });
         }, 40);
-
     };
 
 
@@ -77,7 +77,7 @@ class Game {
     };
 
 
-
+//obstacle
     detectCollision(obstacleInstance){
         if (
             this.player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
@@ -95,6 +95,8 @@ class Game {
         } 
     };
 
+
+//bonus
     detectBonusCollision(bonusInstance){
         if (this.player.positionX < bonusInstance.positionX + bonusInstance.width &&
             this.player.positionX + this.player.width > bonusInstance.positionX &&
@@ -105,7 +107,7 @@ class Game {
             this.bonusArr.shift();
             score++;
             this.scoreElm = document.getElementById("score");
-            this.scoreElm.innerHTML = "Bananaaaaaas " + score;
+            this.scoreElm.innerHTML = "I ate " + score +" bananas";
 
           }
     };
@@ -117,21 +119,28 @@ class Game {
         }
     };
 
+
+//score
     incrementScore(){
             this.score++;
             scoreElement.textContent = this.score;
     }
 
+
+//bullets
     detectBulletCollision(bulletInstance) {
-        this.obstaclesArr.forEach((obstacleInstance) => {
-        if (bulletInstance.positionY > obstacleInstance.positionY &&
-            bulletInstance.positionY < obstacleInstance.positionY + obstacleInstance.height &&
-            bulletInstance.positionX + bulletInstance.width > obstacleInstance.positionX &&
-            bulletInstance.positionX < obstacleInstance.positionX + obstacleInstance.width
-            ){
+        this.obstaclesArr.forEach((obstacleInstance, index) => {
+            if (bulletInstance.positionY > obstacleInstance.positionY &&
+                bulletInstance.positionY < obstacleInstance.positionY + obstacleInstance.height &&
+                bulletInstance.positionX + bulletInstance.width > obstacleInstance.positionX &&
+                bulletInstance.positionX < obstacleInstance.positionX + obstacleInstance.width
+            ){               
+
                 obstacleInstance.obstacleElm.remove();
                 bulletInstance.bulletElm.remove();
-                this.obstaclesArr.shift();
+                this.obstaclesArr.splice(index, 1);   // keep this, otherwise is killing you detroyed invisible obstacle
+                this.bulletArr.splice(index, 1);
+               
             }
         });
     } 
@@ -142,8 +151,6 @@ class Game {
             this.bulletArr.shift();
         }
     }
-
-
 }
 
 class Player {
@@ -236,8 +243,8 @@ class Bonus {
 
 class Bullet {
     constructor(playerPosX, playerPosY){
-        this.width = 20;
-        this.height = 20;
+        this.width = 55;
+        this.height = 25;
         this.positionX = playerPosX + 70;
         this.positionY = playerPosY + 35;
         this.bulletElm = null;
