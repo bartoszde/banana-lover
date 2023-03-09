@@ -5,20 +5,27 @@
     margin: auto;
     position: relative;
     background-color: rgb(211, 200, 180);
-    box-shadow: 5px 10px #5ed1b0;
+    box-shadow: 5px 10px #1105f1;
     background-image: url(../images/ezgif.com-crop.gif);
+    border-radius: 25px;
 }
 
 #game-name {
     text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 40px;
+    color: #1105f1;
+    text-shadow: -3px 3px #a4bcd3; 
 }
 
 #score {
-    color: black;
-    font-size: 18pt;
-    position: absolute;
-    left: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(30, 30, 47);
+    font-size: 16pt;
+    position:absolute;
+    left: auto;
     top: 20px;
+
 }
 
 #player{
@@ -36,8 +43,19 @@
 
 #gameover {
     text-align: center;
-    color: yellow;
-    background-color: blueviolet;
+    color: purple;
+    
+}
+#you-loose {
+    width: 550px;
+    height: 398px;
+    border: 2px solid black;
+    margin: auto;
+    position: relative;
+    background-color: rgb(211, 200, 180);
+    box-shadow: 5px 10px purple;
+    background-image: url(../images/minion-poisoned.gif);
+    border-radius: 25px;
 }
 
 .bonus {
@@ -46,6 +64,10 @@
 }
 
 .bullet {
-    background-color: fuchsia;
+    background-image: url("../images/eye-bullet.png");
     position: absolute;
+}
+
+body {
+    background-color: rgb(244, 236, 5);
 }
