@@ -16,6 +16,7 @@
     font-size: 40px;
     color: #1105f1;
     text-shadow: -3px 3px #a4bcd3; 
+    text-transform: uppercase;
 }
 
 #score {
@@ -26,6 +27,15 @@
     left: auto;
     top: 20px;
 
+}
+
+#berry {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(30, 30, 47);
+    font-size: 16pt;
+    position:absolute;
+    left: auto;
+    top: 40px;
 }
 
 #player{
@@ -58,6 +68,24 @@
     border-radius: 25px;
 }
 
+#winner {
+    width: 498px;
+    height: 278px;
+    border: 2px solid black;
+    margin: auto;
+    position: relative;
+    background-color: rgb(211, 200, 180);
+    box-shadow: 5px 10px purple;
+    background-image: url(../images/minions-kiss.gif);
+    border-radius: 25px;
+}
+
+#awesome {
+    text-align: center;
+    color: purple;  
+ 
+}
+
 .bonus {
     background-image: url("../images/banano.png");
     position: absolute;
@@ -70,4 +98,18 @@
 
 body {
     background-color: rgb(244, 236, 5);
+    text-align: center;
+}
+
+#rules {
+    text-align:left;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color:#1105f1;
+    list-style-image: url(../images/minmin.png);
+}
+
+#confetti {
+    background-image: url(../images/confetti.gif);
 }
