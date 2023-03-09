@@ -2,7 +2,7 @@
 
 ## Game: Banana lover :banana: :yellow_heart:
 
-Banan lover is Javascript game. Player can move up/down by using arrows to collect bonuses (bananas) and avoid obsticles (blueberries). Player can also shoot by pressing "spacebar" and destroy obsticles.
+Banana lover is Javascript game. Player can move up/down by using arrows to collect bonuses (bananas :banana:) and avoid obsticles (blueberries :berry:). Player can also shoot by pressing "spacebar" and destroy blueberries.
 
 If you collect 5 bananas you win! But if blueberry touch you - you lose!
 
