@@ -1,7 +1,4 @@
 const board = document.getElementById("game-board")
-score = 0
-
-
 
 class Game {
     constructor(){
@@ -9,7 +6,8 @@ class Game {
         this.obstaclesArr = [];  //will store instances of the class Obstacle
         this.bonusArr = [];
         this.bulletArr = [];
-        
+        this.score = 0;
+        this.berry = 0;
     }
 
     start(){
@@ -54,9 +52,8 @@ class Game {
                this.detectBonusCollision(bonusInstance);
                this.removeBonusIfOutside(bonusInstance);
             });
-        }, 40);
+        }, 30);
     };
-
 
 
     attachEventListeners(){
@@ -105,10 +102,10 @@ class Game {
           ){
             bonusInstance.bonusElm.remove(); //remove from the bonus dom
             this.bonusArr.shift();
-            score++;
-            this.scoreElm = document.getElementById("score");
-            this.scoreElm.innerHTML = "I ate " + score +" bananas";
-
+            this.incrementScore();
+            if (this.score >= 5) {
+                window.location.href = "./winner.html";
+            }
           }
     };
 
@@ -122,9 +119,11 @@ class Game {
 
 //score
     incrementScore(){
-            this.score++;
-            scoreElement.textContent = this.score;
+        this.score++;
+        const scoreElement = document.getElementById("score");
+        scoreElement.textContent = "Bananas collected: " + this.score;
     }
+
 
 
 //bullets
@@ -140,6 +139,7 @@ class Game {
                 bulletInstance.bulletElm.remove();
                 this.obstaclesArr.splice(index, 1);   // keep this, otherwise is killing you detroyed invisible obstacle
                 this.bulletArr.splice(index, 1);
+                this.shootBerries();
                
             }
         });
@@ -150,6 +150,13 @@ class Game {
             bulletInstance.bulletElm.remove();
             this.bulletArr.shift();
         }
+    }
+
+//counting berries
+    shootBerries(){
+        this.berry++;
+        const berryElement = document.getElementById("berry");
+        berryElement.textContent = "Destroyed berries: " + this.berry;
     }
 }
 
@@ -249,7 +256,6 @@ class Bullet {
         this.positionY = playerPosY + 35;
         this.bulletElm = null;
         this.createBulletElement();
-       
     }
 
     createBulletElement(){
@@ -267,12 +273,7 @@ class Bullet {
         this.positionX = this.positionX + 40;
         this.bulletElm.style.left = this.positionX + "px";
     }
-
 }
 
 const game = new Game();
 game.start();
-
-
-
-
