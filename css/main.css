@@ -51,9 +51,13 @@
     position: absolute;
 }
 
-#gameover {
+.win-lose {
     text-align: center;
-    color: purple;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    color: #1105f1;
+    text-shadow: -3px 3px #a4bcd3; 
+    text-transform: uppercase;
     
 }
 #you-loose {
@@ -80,11 +84,7 @@
     border-radius: 25px;
 }
 
-#awesome {
-    text-align: center;
-    color: purple;  
- 
-}
+
 
 .bonus {
     background-image: url("../images/banano.png");
