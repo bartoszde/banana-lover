@@ -7,7 +7,7 @@ Game **Banana Lover** :banana: :yellow_heart: is my first project on Ironhack bo
 - Collect bananas to win! 
 
 # Demo
-**[Let's play and smash it!]** (https://bartoszde.github.io/banana-lover/) 
+**[Let's play and smash it!](https://bartoszde.github.io/banana-lover/)**
 
 # Coding Process And Further Improvments
 ### MVP
