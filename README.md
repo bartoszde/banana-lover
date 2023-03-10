@@ -1,18 +1,17 @@
-# Project1: The Game
+# Description
+Game **Banana Lover** :banana: :yellow_heart: is my first project on Ironhack bootcamp. It's OOP game built with web technologies (html, css, javascript).
 
-## Game: Banana lover :banana: :yellow_heart:
+# How To Play
+- Move the player up/down with arrow keys
+- Activate shooting with spacebar to destroy berries
+- Collect bananas to win! 
 
-Banana lover is Javascript game. Player can move up/down by using arrows to collect bonuses (bananas :banana:) and avoid obsticles (blueberries :berry:). Player can also shoot by pressing "spacebar" and destroy blueberries.
+# Demo
+**[Let's play and smash it!]** (https://bartoszde.github.io/banana-lover/) 
 
-If you collect 5 bananas you win! But if blueberry touch you - you lose!
-
-Let's play! **https://bartoszde.github.io/banana-lover/** 
-
-
----
-## Coding process
+# Coding Process And Further Improvments
 ### MVP
-- **player displayed and user can move up/down**
+- **player displayed and can move up/down**
 - **obstacles apper and move from right to left**
 - **obstacles have random position**
 - **game is framed in a board game**
@@ -42,3 +41,10 @@ Let's play! **https://bartoszde.github.io/banana-lover/**
 - [x] *add shooting to remove obstacles*
 - [x] *add score list when shooting*
 - [x] *add winner page*
+- [x] *add sound to winning page*
+
+### Further Improvments
+- [ ] *add levels (ex. increasing spees as user reach next level)*
+- [ ] *add master obstacle, which needs get more shootings to be damaged*
+- [ ] *add sound efects to background and shooting*
+- [ ] *allow player moing left/right*
